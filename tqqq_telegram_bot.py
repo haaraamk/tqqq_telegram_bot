@@ -8,6 +8,10 @@ TQQQ+QQQ 전략 텔레그램 알림 봇
     pip install yfinance requests pandas
 """
 
+import os
+TELEGRAM_TOKEN   = os.environ.get("TELEGRAM_TOKEN")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
+
 import yfinance as yf
 import pandas as pd
 import requests
@@ -17,7 +21,7 @@ import pytz
 # ════════════════════════════════════════════
 # ① 설정값 — 여기만 바꾸세요
 # ════════════════════════════════════════════
-TELEGRAM_TOKEN   = "여기에_새_토큰_입력"   # ← BotFather에서 재발급한 토큰
+TELEGRAM_TOKEN   = "8718913186:AAEk9onMEaiFA1IK1zRZJ4KXS8VREz3Corc"   # ← BotFather에서 재발급한 토큰
 TELEGRAM_CHAT_ID = "7039368970"
 
 # 전략 파라미터
