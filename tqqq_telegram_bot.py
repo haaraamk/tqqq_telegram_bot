@@ -82,48 +82,26 @@ def build_message(s: dict) -> str:
     now = datetime.now(pytz.timezone("Asia/Seoul")).strftime("%Y-%m-%d %H:%M")
 
     if s["sl_signal"]:
-        signal_line = "🔴 [손절 신호] TQQQ 전량 매도 -> QQQ 전환"
+        signal = "SELL ALL - Stop Loss"
     elif s["tp_signal"]:
-        signal_line = "⭐ [익절 신호] TQQQ 50% 매도 -> QQQ 이동"
+        signal = "SELL 50% - Take Profit"
     elif s["buy_signal"]:
-        signal_line = "🟢 [매수 신호] TQQQ 50만원 분할매수"
+        signal = "BUY - 50만원"
     else:
-        signal_line = "⚪ [관망] 신호 없음 -> QQQ 보유 유지"
+        signal = "WAIT - QQQ 보유"
 
-    if s["ma5"] < s["ma20"] < s["ma60"]:
-        ma_status = "역배열 (매수 구간)"
-    elif s["ma5"] > s["ma20"] > s["ma60"]:
-        ma_status = "정배열 (상승 추세)"
-    else:
-        ma_status = "혼조"
-
-    tqqq_emoji = "📈" if s["chg_tqqq"] >= 0 else "📉"
-    qqq_emoji  = "📈" if s["chg_qqq"]  >= 0 else "📉"
+    tqqq_sign = "+" if s["chg_tqqq"] >= 0 else ""
+    qqq_sign  = "+" if s["chg_qqq"]  >= 0 else ""
 
     return (
-        f"TQQQ+QQQ 전략 일일 리포트\n"
-        f"{now} KST\n"
-        f"----------------\n"
-        f"{signal_line}\n"
-        f"----------------\n"
-        f"💹 시세\n"
-        f"  {tqqq_emoji} TQQQ: ${s['price_tqqq']:.2f} ({s['chg_tqqq']:+.2f}%)\n"
-        f"  {qqq_emoji} QQQ:  ${s['price_qqq']:.2f} ({s['chg_qqq']:+.2f}%)\n"
-        f"\n"
-        f"📐 이동평균선\n"
-        f"  MA5:  ${s['ma5']:.2f}\n"
-        f"  MA20: ${s['ma20']:.2f}\n"
-        f"  MA60: ${s['ma60']:.2f}\n"
-        f"  상태: {ma_status}\n"
-        f"----------------\n"
-        f"📌 전략 기준\n"
-        f"  매수: MA5 아래로 역배열시\n"
-        f"  손절: 평균단가 -40%\n"
-        f"  익절: 평균단가 +100% 시 50% 매도\n"
-        f"----------------\n"
-        f"교육용 / 투자 권유 아님"
+        f"[TQQQ Bot] {now}\n"
+        f"신호: {signal}\n\n"
+        f"TQQQ: ${s['price_tqqq']:.2f} ({tqqq_sign}{s['chg_tqqq']:.2f}%)\n"
+        f"QQQ:  ${s['price_qqq']:.2f} ({qqq_sign}{s['chg_qqq']:.2f}%)\n\n"
+        f"MA5:  ${s['ma5']:.2f}\n"
+        f"MA20: ${s['ma20']:.2f}\n"
+        f"MA60: ${s['ma60']:.2f}\n"
     )
-
 
 def main():
     print("신호 계산 중...")
