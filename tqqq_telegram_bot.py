@@ -107,10 +107,8 @@ def get_signal():
 # ④ 메시지 생성
 # ════════════════════════════════════════════
 def build_message(s: dict) -> str:
-    kst = pytz.timezone("Asia/Seoul")
-    now = datetime.now(kst).strftime("%Y-%m-%d %H:%M")
+    now = datetime.now(pytz.timezone("Asia/Seoul")).strftime("%Y-%m-%d %H:%M")
 
-    # 신호 이모지/텍스트
     if s["sl_signal"]:
         signal_line = "🔴 [손절 신호] TQQQ 전량 매도 → QQQ 전환"
     elif s["tp_signal"]:
@@ -120,7 +118,6 @@ def build_message(s: dict) -> str:
     else:
         signal_line = "⚪ [관망] 신호 없음 — QQQ 보유 유지"
 
-    # MA 정렬 상태
     if s["ma5"] < s["ma20"] < s["ma60"]:
         ma_status = "🔽 역배열 (MA5 < MA20 < MA60)"
     elif s["ma5"] > s["ma20"] > s["ma60"]:
@@ -128,48 +125,32 @@ def build_message(s: dict) -> str:
     else:
         ma_status = "↔️ 혼조"
 
-    # 등락 이모지
     tqqq_emoji = "📈" if s["chg_tqqq"] >= 0 else "📉"
     qqq_emoji  = "📈" if s["chg_qqq"]  >= 0 else "📉"
 
-    # 보유 현황 (입력한 경우만)
-    holding_section = ""
-    if AVG_PRICE > 0 and HOLDINGS > 0:
-        holding_section = (
-            f"\n"
-            f"━━━━━━━━━━━━━━━━\n"
-            f"📂 <b>내 보유 현황</b>\n"
-            f"  평균단가: ${AVG_PRICE:.2f}\n"
-            f"  보유수량: {HOLDINGS:.2f}주\n"
-            f"  평가손익: {s['pnl_rate']:+.1f}%\n"
-            f"  {'🚨 손절 기준(-40%) 도달!' if s['sl_signal'] else '⭐ 익절 기준(+100%) 도달!' if s['tp_signal'] else '✅ 정상 보유 중'}"
-        )
-
-    msg = (
-        f"📊 <b>TQQQ+QQQ 전략 일일 리포트</b>\n"
+    return (
+        f"📊 TQQQ+QQQ 전략 일일 리포트\n"
         f"🕕 {now} (KST)\n"
         f"━━━━━━━━━━━━━━━━\n"
         f"{signal_line}\n"
         f"━━━━━━━━━━━━━━━━\n"
-        f"💹 <b>시세</b>\n"
+        f"💹 시세\n"
         f"  {tqqq_emoji} TQQQ: ${s['price_tqqq']:.2f} ({s['chg_tqqq']:+.2f}%)\n"
         f"  {qqq_emoji} QQQ:  ${s['price_qqq']:.2f} ({s['chg_qqq']:+.2f}%)\n"
         f"\n"
-        f"📐 <b>이동평균선</b>\n"
+        f"📐 이동평균선\n"
         f"  MA5:  ${s['ma5']:.2f}\n"
         f"  MA20: ${s['ma20']:.2f}\n"
         f"  MA60: ${s['ma60']:.2f}\n"
         f"  상태: {ma_status}\n"
-        f"{holding_section}\n"
         f"━━━━━━━━━━━━━━━━\n"
-        f"📌 <b>전략 기준</b>\n"
+        f"📌 전략 기준\n"
         f"  매수: MA5 < MA20 < MA60\n"
         f"  손절: 평균단가 -40%\n"
         f"  익절: 평균단가 +100% → 50% 매도\n"
         f"━━━━━━━━━━━━━━━━\n"
         f"⚠️ 교육용 시뮬레이션 / 투자 권유 아님"
     )
-    return msg
 
 
 # ════════════════════════════════════════════
