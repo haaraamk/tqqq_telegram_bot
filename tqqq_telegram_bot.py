@@ -103,6 +103,17 @@ def build_message(s: dict) -> str:
         f"MA60: ${s['ma60']:.2f}\n"
     )
 
+def test_send():
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    res = requests.post(url, json={
+        "chat_id": TELEGRAM_CHAT_ID,
+        "text": "test"
+    }, timeout=10)
+    print(res.text)
+
+if __name__ == "__main__":
+    test_send()
+
 def main():
     print("신호 계산 중...")
     try:
