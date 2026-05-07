@@ -131,9 +131,9 @@ def build_message(s: dict) -> str:
     return (
         f"📊 TQQQ+QQQ 전략 일일 리포트\n"
         f"🕕 {now} (KST)\n"
-        f"━━━━━━━━━━━━━━━━\n"
+        f"----------------\n"
         f"{signal_line}\n"
-        f"━━━━━━━━━━━━━━━━\n"
+        f"----------------\n"
         f"💹 시세\n"
         f"  {tqqq_emoji} TQQQ: ${s['price_tqqq']:.2f} ({s['chg_tqqq']:+.2f}%)\n"
         f"  {qqq_emoji} QQQ:  ${s['price_qqq']:.2f} ({s['chg_qqq']:+.2f}%)\n"
@@ -143,12 +143,12 @@ def build_message(s: dict) -> str:
         f"  MA20: ${s['ma20']:.2f}\n"
         f"  MA60: ${s['ma60']:.2f}\n"
         f"  상태: {ma_status}\n"
-        f"━━━━━━━━━━━━━━━━\n"
+        f"----------------\n"
         f"📌 전략 기준\n"
         f"  매수: MA5 < MA20 < MA60\n"
         f"  손절: 평균단가 -40%\n"
         f"  익절: 평균단가 +100% → 50% 매도\n"
-        f"━━━━━━━━━━━━━━━━\n"
+        f"----------------\n"
         f"⚠️ 교육용 시뮬레이션 / 투자 권유 아님"
     )
 
