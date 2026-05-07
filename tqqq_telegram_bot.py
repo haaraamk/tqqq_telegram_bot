@@ -60,8 +60,6 @@ def main():
         "MA60: $" + str(round(ma60,2)) + "\n"
         "상태: " + ma_st +
         pnl + "\n"
-        "---\n"
-        "⚠️ 교육용 / 투자권유 아님"
     )
 
     res = requests.post(
