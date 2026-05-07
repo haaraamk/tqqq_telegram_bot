@@ -15,8 +15,8 @@ import pandas as pd
 import yfinance as yf
 from datetime import datetime
 
-TELEGRAM_TOKEN   = os.environ.get("TELEGRAM_TOKEN", "8718913186:AAEk9onMEaiFA1IK1zRZJ4KXS8VREz3Corc")
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "7039368970")
+TELEGRAM_TOKEN   = os.environ.get("TELEGRAM_TOKEN", "")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
 
 # 전략 파라미터
 STOP_LOSS    = -0.40   # 손절 기준
