@@ -9,20 +9,14 @@ TQQQ+QQQ 전략 텔레그램 알림 봇
 """
 
 import os
-TELEGRAM_TOKEN   = os.environ.get("TELEGRAM_TOKEN")
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
-
-import yfinance as yf
-import pandas as pd
-import requests
-from datetime import datetime, timedelta
 import pytz
+import requests
+import pandas as pd
+import yfinance as yf
+from datetime import datetime
 
-# ════════════════════════════════════════════
-# ① 설정값 — 여기만 바꾸세요
-# ════════════════════════════════════════════
-TELEGRAM_TOKEN   = "8718913186:AAEk9onMEaiFA1IK1zRZJ4KXS8VREz3Corc"   # ← BotFather에서 재발급한 토큰
-TELEGRAM_CHAT_ID = "7039368970"
+TELEGRAM_TOKEN   = os.environ.get("TELEGRAM_TOKEN", "8718913186:AAEk9onMEaiFA1IK1zRZJ4KXS8VREz3Corc")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "7039368970")
 
 # 전략 파라미터
 STOP_LOSS    = -0.40   # 손절 기준
