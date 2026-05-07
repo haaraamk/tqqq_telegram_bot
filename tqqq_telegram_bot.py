@@ -101,8 +101,8 @@ def build_message(s: dict) -> str:
     qqq_emoji  = "📈" if s["chg_qqq"]  >= 0 else "📉"
 
     return (
-        f"📊 TQQQ+QQQ 전략 일일 리포트\n"
-        f"🕕 {now} (KST)\n"
+        f"TQQQ+QQQ 전략 일일 리포트\n"
+        f"{now} KST\n"
         f"----------------\n"
         f"{signal_line}\n"
         f"----------------\n"
