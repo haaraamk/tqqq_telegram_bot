@@ -1,6 +1,5 @@
 name: TQQQ Daily Alert
 
-
 on:
   schedule:
     - cron: '30 21 * * 1-5'
