@@ -110,20 +110,20 @@ def build_message(s: dict) -> str:
     now = datetime.now(pytz.timezone("Asia/Seoul")).strftime("%Y-%m-%d %H:%M")
 
     if s["sl_signal"]:
-        signal_line = "🔴 [손절 신호] TQQQ 전량 매도 → QQQ 전환"
+        signal_line = "🔴 [손절 신호] TQQQ 전량 매도 -> QQQ 전환"
     elif s["tp_signal"]:
-        signal_line = "⭐ [익절 신호] TQQQ 50% 매도 → QQQ 이동"
+        signal_line = "⭐ [익절 신호] TQQQ 50% 매도 -> QQQ 이동"
     elif s["buy_signal"]:
         signal_line = "🟢 [매수 신호] TQQQ 50만원 분할매수"
     else:
-        signal_line = "⚪ [관망] 신호 없음 — QQQ 보유 유지"
+        signal_line = "⚪ [관망] 신호 없음 -> QQQ 보유 유지"
 
     if s["ma5"] < s["ma20"] < s["ma60"]:
         ma_status = "🔽 역배열 (MA5 < MA20 < MA60)"
     elif s["ma5"] > s["ma20"] > s["ma60"]:
         ma_status = "🔼 정배열 (MA5 > MA20 > MA60)"
     else:
-        ma_status = "↔️ 혼조"
+        ma_status = "혼조"
 
     tqqq_emoji = "📈" if s["chg_tqqq"] >= 0 else "📉"
     qqq_emoji  = "📈" if s["chg_qqq"]  >= 0 else "📉"
@@ -147,7 +147,7 @@ def build_message(s: dict) -> str:
         f"📌 전략 기준\n"
         f"  매수: MA5 < MA20 < MA60\n"
         f"  손절: 평균단가 -40%\n"
-        f"  익절: 평균단가 +100% → 50% 매도\n"
+        f"  익절: 평균단가 +100% -> 50% 매도\n"
         f"----------------\n"
         f"⚠️ 교육용 시뮬레이션 / 투자 권유 아님"
     )
